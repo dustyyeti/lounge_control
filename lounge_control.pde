@@ -12,6 +12,7 @@ GUI[] guis;
 
 PFont font;
 PImage bgImg;
+PFont dripFont;
 
 int rgbR = 0;
 int rgbG = 20;
@@ -35,14 +36,16 @@ void setup() {
 
   bgImg = loadImage("bg.jpg");
   bgImg.resize(width, height);
-  font = createFont("calibri light bold", 15);
+  //font = createFont("calibri light bold", 15);
+  font = createFont("a dripping marker", 32);
+  dripFont = loadFont("adrippingmarker-32.vlw"); 
 
   start = cp5.addButton("start")
     .setPosition(width/2 - width/3, height/2 -20)
-    .setSize(width*2/3, 40)
+    .setSize(width*2/3, 50)
     .setColorActive(cPick)
-    .setLabel("Phil & Sarah M Disco Light Lounge Control || "+VerStr)
-    .setFont(font)
+    .setLabel("Phil & Sarah M Disco Light Lounge Control")
+    .setFont(dripFont)
     .setColorLabel(color(60, 100, 0))
     .setColorBackground(color(20, 190))
     ;
@@ -57,7 +60,8 @@ void draw() {
       guis[0].display("all");
       guis[1].display("red");
       guis[2].display("green");
-      guis[3].display("blue");      
+      guis[3].display("blue");
+      text(VerStr, width-margin-30, height - margin/2);
     }
 
     for (Light light : lights) {
