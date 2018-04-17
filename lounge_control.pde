@@ -36,8 +36,8 @@ void setup() {
 
   bgImg = loadImage("bg.jpg");
   bgImg.resize(width, height);
-  //font = createFont("calibri light bold", 15);
-  font = createFont("a dripping marker", 32);
+  font = createFont("calibri bold", 15);
+  textFont(font);
   dripFont = loadFont("adrippingmarker-32.vlw"); 
 
   start = cp5.addButton("start")
@@ -55,14 +55,17 @@ void draw() {
   background(0);
   background(bgImg);
   // fill (255, 200, 0);
+  //textAlign();
+
+  text("Ver "+VerStr, margin, height - margin/2+5);  
   if (!PAUSE) {
     if (SETBUTTS) {
       guis[0].display("all");
       guis[1].display("red");
       guis[2].display("green");
       guis[3].display("blue");
-      text(VerStr, width-margin-30, height - margin/2);
     }
+    fill(100);
 
     for (Light light : lights) {
       light.Display();

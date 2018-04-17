@@ -26,17 +26,10 @@ class Light {
   }
   void Program(Boolean state, int buttI) { //clicked while in setcolor mode
     println("<##--Program(state, buttI "+state+" "+buttI);
-    //CColor col = new CColor();
-    //col.setActive(color(0, 0, 100));
-    //col.setForeground(color(cPick));
-    //col.setBackground(color(0, 30));
-    //col.setCaptionLabel(color(100));   
+
     if (state) { // ready to program
       butts[buttI].setLabel("assign color");
       println();
-      //color1[buttI]=butts[buttI].getColor();
-
-
       butts[buttI].setOff(); // during setcolor programing, there is no need to toggle the button on or off/ stay off.
     } else {
       butts[buttI].setLabel(lights[buttI].name);

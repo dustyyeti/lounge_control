@@ -33,12 +33,7 @@ void Router(String go, String msg) {  //
     UnPause();
     break;
   case "exec_B":
-    ExecStr = "";
-    for (Light light : lights) {  //look through light array and build serial msg based on settings
-      String GetMsg = LightMsg(light.buttI);//null,null,light.buttI);
-      println(GetMsg);
-      ExecStr = ExecStr + GetMsg;
-    }  
+    MakeExecStr();
     print ("hey bozo: "+ExecStr);
     //UpdateUI(ExecStr);
     if (CONNECTED) {

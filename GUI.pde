@@ -272,17 +272,28 @@ void ProgMenu(int unit, int xMult, int wMult) {
     ;
 
   cp5.addRadioButton("radioButton")
-    .setPosition(20, 15)
-    .setSize(20, 20)
-    .setColorForeground(color(40))
+    .setPosition(20, 10)
+    .setSize(18, 18)
+    .setColorForeground(color(0,75,0))
+    .setColorBackground(color(40))
     .setColorActive(color(100))
     .setColorLabel(color(100))
-    .setItemsPerRow(2)
+    .setItemsPerRow(1)
     .setSpacingColumn(50)
     .addItem("Direct", 1)
-    .addItem("Script", 2)
-    //.addItem("150", 3)
+    .addItem("Script", 2)   
     .setGroup(groups[1])
     .activate(0)
+    ;
+    
+    cp5.addBang("save")
+    .setPosition(120,19)
+    .setSize (18,18)
+    .setGroup(groups[1])
+    ;
+    cp5.addBang("load")
+    .setPosition(160,19)
+    .setSize (18,18)
+    .setGroup(groups[1])
     ;
 }

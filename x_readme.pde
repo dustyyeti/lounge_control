@@ -1,4 +1,4 @@
-String VerStr = "V 0.5.0";
+String VerStr = "0.5.0";
 
 /*
 
