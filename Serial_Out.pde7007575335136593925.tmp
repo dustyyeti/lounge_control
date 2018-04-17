@@ -1,0 +1,20 @@
+void SetLight(CallbackListener bang, String bName, int bi) {
+  Boolean power = butts[bi].getBooleanValue();
+  String lColor = butts[bi].getStringValue();
+  //String hColor = hex
+  println(lColor);
+  println(power);
+  String smsg;
+
+  if (power) {
+    smsg = "<+"+bi+"*"+lColor+">";
+  } else {
+    smsg = "<-"+bi+">";
+  }
+  println(smsg);
+  char [] msg=smsg.toCharArray();
+
+  for (int i=0; i<msg.length; i++) {
+    //port.write(msg[i]);
+  }
+}

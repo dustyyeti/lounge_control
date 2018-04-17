@@ -1,0 +1,117 @@
+PFont menuFont;
+int margin = 20; // space between rows and columns of buttons, and window edge
+int header = 70; // a top header space
+int footer = 30;
+int mH =  margin;
+int unit;
+int mMarg = 1;
+int lounge_count;
+//Lounge Inital settings
+
+Slider sliders[];
+Group groups[];
+
+int numSliders = 2;
+int numGroups = 2;
+Boolean updated = false;
+
+void lounge_count(int theValue){
+println("--> loungeCount("+theValue);
+}
+void DrawGui() {
+  lounge_count = loungeCount;
+  sliders = new Slider[numSliders];
+  groups = new Group[numGroups];
+  unit = width/6;
+  menuFont = createFont("calibri light bold", 13);
+  SetupMenu(unit, 0, 1); //x multiplier, w multiplier
+  ProgMenu(unit, 1, 2);
+}
+void SetupMenu(int unit, int xMult, int wMult) {
+  println(unit);
+  println(xMult);
+  groups[0] = cp5.addGroup("SetupGrp")
+    .setPosition(unit*xMult, mH)
+    .setWidth(unit*wMult-mMarg)
+    .setHeight(mH)
+    .activateEvent(true)
+    .setBackgroundColor(color(0, 180))
+    .setBackgroundHeight(header)
+    .setLabel("Setup")
+    .setFont(menuFont)
+    .close()
+    ;
+  sliders[0] = cp5.addSlider("lounge_count")
+    .setPosition(unit*xMult, margin)
+    .setWidth(unit*wMult)
+    .setRange(1, 8)
+    .setGroup(groups[0])
+    .setSliderMode(Slider.FLEXIBLE)
+    .setLabel("Lounge Count");
+    ;
+
+  sliders[1] = cp5.addSlider("zoneCount")
+    .setPosition(unit*xMult, header-(margin))
+    .setWidth(unit*wMult)
+    //.setSize(unit * wMult-4, 12)
+    .setRange(1, 5)
+    //.setNumberOfTickMarks(8)
+    .setGroup(groups[0])
+    .setSliderMode(Slider.FLEXIBLE)
+    ;    
+  // reposition the Label for controller 'slider'
+  for (Slider slider : sliders) {
+    slider.getValueLabel().align(ControlP5.RIGHT, ControlP5.TOP_OUTSIDE).setPaddingX(0);
+    slider.getCaptionLabel().align(ControlP5.LEFT, ControlP5.TOP_OUTSIDE).setPaddingX(0);
+  }
+
+
+  sliders[0].addCallback(new CallbackListener() {
+    public void controlEvent(CallbackEvent theEvent) {
+      switch(theEvent.getAction()) {
+        case(ControlP5.ACTION_LEAVE): 
+        println("released!");
+        
+        //SetLight(this, name, buttI);
+        break;
+      }
+    }
+  }        
+
+  );
+
+  //groups[0].addCallback(new CallbackListener() {
+  //  public void controlEvent(CallbackEvent theEvent) {
+  //    switch(theEvent.getAction()) {
+  //      case(ControlP5.ACTION_LEAVE): 
+  //      println("released!");
+        
+  //      //SetLight(this, name, buttI);
+  //      break;
+  //    }
+  //  }
+  //}        
+
+  //);
+
+}
+
+void SetupGrp(Boolean isUpdate){
+  println("heello");
+  println(isUpdate);
+}
+void ProgMenu(int unit, int xMult, int wMult) {
+
+
+  Group g2 = cp5.addGroup("g2")
+    .setPosition(unit*xMult, mH)
+    .setWidth(unit*wMult)
+    .setHeight(mH)
+    .activateEvent(true)
+    .setBackgroundColor(color(255, 80))
+    .setBackgroundHeight(header)
+    .setLabel("Program")
+    .setFont(menuFont)
+    .close()
+    ;
+}

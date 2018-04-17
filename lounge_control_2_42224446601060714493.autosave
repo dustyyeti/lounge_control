@@ -1,0 +1,68 @@
+import controlP5.*;
+import processing.serial.*;
+
+ControlP5 cp5;
+Serial port;
+
+int lightCount;
+Light[] lights;
+
+
+PFont font;
+
+
+PImage bgImg;
+
+int rgbR = 0;
+int rgbG = 80;
+int rgbB = 255;
+
+color cPick_def = color(rgbR, rgbG, rgbB, 255);
+color cPick;
+color offBlack = color (rgbR, rgbG, rgbB, 70);
+
+int loungeCount = 6;
+int zoneCount =3;
+
+void setup() {
+  size(600, 600);
+  //loungeCount = 6;
+  //zoneCount = 3;
+  cp5 = new ControlP5(this);
+  cPick = cPick_def;
+  bgImg = loadImage("bg.jpg");
+  bgImg.resize(width, height);
+  font = createFont("calibri light bold", 18);
+  cp5.addButton("home")
+    .setPosition(margin, header/2+margin-12)
+    .setSize(width-margin-margin, 24)
+    .setColorActive(cPick)
+    //.setColorBackground(offBlack) 
+    //.setSwitch(true)
+    .setLabel("Phil and Sarah M. Disco Light Lounge Control")
+    .setFont(font)
+    .setColorLabel(color(200,200,0))
+    .setColorBackground(color(0,190))
+    .lock()
+    //.setOff();  
+  ;
+  Survey();
+  DrawGui();
+
+
+  for (Light light : lights) {
+    light.makeButtons();
+  }
+}
+
+void draw() {
+  background(0);
+  background(bgImg);
+  fill (255, 200, 0);
+  
+  //text ("Phil and Sarah M Disco Light Lounge Control", margin*6, 40);
+
+  for (Light light : lights) {
+    light.display();
+  }
+}

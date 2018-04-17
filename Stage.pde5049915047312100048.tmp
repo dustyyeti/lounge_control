@@ -1,0 +1,37 @@
+
+
+//GUI settings
+//StringList Ports;
+//Serial Ports;
+
+
+void Survey() {
+ // println(">--Survey()");
+ // Ports = new StringList();
+ // Ports = Serial.list();
+ //printArray (Serial.list());
+ // Ports = new String[10];
+  
+  lightCount = loungeCount * zoneCount;
+  //println("******* lightcount: "+lightCount);
+  lights = new Light[lightCount];
+  butts = new Button[lightCount];
+
+  //calcluate button sizes
+  int bW = ((width - margin ) / (zoneCount)) - margin;
+  int bH = ((height - header - footer - (2*margin)) / (loungeCount) ) - margin;  
+  int bX,bY;
+  int bX2,bY2;
+  int index = 0;
+  String bName;
+  for (int y = 0; y < loungeCount; y++) {
+    for (int x = 0; x < zoneCount; x++) {
+      bX = margin + (x*bW+ margin * x);
+      bY = header + margin + (y*bH+ margin * y);
+      bName = "# Light "+(index+1)+"   ["+(y+1)+"-"+(x+1)+"]";  
+      lights[index] = new Light(bX, bY, bW, bH, bName, cPick, index++);
+      //println(lights[index-1]+" specifications stored."); 
+
+    }
+  }
+}

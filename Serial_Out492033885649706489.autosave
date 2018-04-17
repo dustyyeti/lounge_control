@@ -1,0 +1,65 @@
+Boolean CONNECTED = false;
+Boolean CON_CHANGED = false;
+int com = 1;
+String Com = "COM";
+
+void SetCom() {
+  println("<--- SetCom()");
+  if (!CONNECTED ) {
+    Com = ("COM"+com);
+    println("attempt connect to "
+      +Com);
+    status_B.setLabel("Try COM"+(com+1));
+    StartCom("connect", null);    
+    com++;
+    if (com > 11) com = 0;
+  }
+}
+void StartCom(String go, String msg) {  //
+  println("<--- StartCom(go, msg: " 
+    +go
+    +", "
+    +msg
+    );
+
+  String bufText = console.getText();
+  String newText; 
+  String updateText = "";
+  String errorText = "";
+
+
+  switch(go) {
+  case "connect":
+    newText = "connected @ "+Com;
+    updateText = bufText + newText;  //removed linefeed  +"\n" because there's a new line with ">" waiting 
+    newText = "no device connection at "+Com;
+    errorText = bufText + newText;  
+    break;
+  case "out":
+    println("OUT CASE START COM");
+    if (CONNECTED) {
+      String portMsg = bufText + msg +"?";
+      WritePort(portMsg);
+    }
+    break;
+  default:
+    break;
+  }  
+  UpdateUI(updateText);
+  console.scroll(1);
+  try {
+    port = new Serial(this, Com, 9600);
+    CON_CHANGED = true;
+  } 
+  catch (Exception e) {
+    UpdateUI(errorText);
+  }
+}
+
+void WritePort(String msg) {
+  println("<**--WritePort(msg)");
+  char [] portMsg=msg.toCharArray();
+  for (int i=0; i<portMsg.length; i++) {
+    port.write(portMsg[i]);
+  }
+}
