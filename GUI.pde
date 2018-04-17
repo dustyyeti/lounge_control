@@ -8,7 +8,6 @@ int unit;
 int mMarg = 1;
 int lounge_count;
 int linenum = 0;
-//Lounge Inital settings
 
 Slider sliders[];
 Slider cSliders[];
@@ -22,7 +21,6 @@ Textarea console;
 Button connect_B, exec_B;
 
 StringList statusLine;
-//String[] statusLine;
 
 
 void lounge_count(int theValue) {
@@ -49,8 +47,6 @@ void UpdateUI(String msg) {
     +msg
     );
   printArray (statusLine);
-  String bufText = console.getText();  
-  String conText = "";
 
   if (CON_CHANGED) {
     CONNECTED = !CONNECTED;
@@ -67,24 +63,6 @@ void UpdateUI(String msg) {
     }
     CON_CHANGED = !CON_CHANGED;
   }
-
-
-
-  //connect_B.setLock(true);  //for some reason this locks the entire UI
-  //  conText = bufText 
-  //    + "\n"
-  //    +msg
-  //    + "\n"
-  //    +">  ";
-  //} else {
-  //  conText = bufText 
-  //    + "\n"
-  //    +msg
-  //    + "\n"
-  //    +"> ";    
-  //  connect_B.setLabel("Connect");
-  //  console.setText("> ");
-  //}
   String t = MakeStatus(msg);//, false);
   console.setText(t);
   console.scroll(.9);
@@ -134,9 +112,6 @@ void DrawConsole() {
     .setColorForeground(color(20, 80, 0))
     .setColorBackground(color(80, 20, 0))
     .setLabel("CONNECT");
-  //.setColor(color(128))
-  //.setColorBackground(color(0, 0, 50, 255))
-  //.setColorForeground(color(255, 100))
   ;
 }
 
@@ -145,10 +120,7 @@ void ExecButton(int unit, int xMult, int wMult) {
     .setPosition(unit*xMult, 0)
     .setWidth(unit*wMult-mMarg)
     .setHeight(mH)
-    //.setBackgroundColor(color(0, 210))
-    //.setLabel("Setup")
     .setFont(menuFont)
-    //.setImage(playImg)
     .setLabel("NOT CONNECTED")
     ;
 }
@@ -166,6 +138,7 @@ void SetupMenu(int unit, int xMult, int wMult) {
     .setFont(menuFont)
     .close()
     ;
+    
   sliders[0] = cp5.addSlider("lounge_count")
     .setPosition(unit*xMult, margin)
     .setWidth(unit*wMult)
@@ -173,18 +146,18 @@ void SetupMenu(int unit, int xMult, int wMult) {
     .setValue(lounge_count)
     .setGroup(groups[0])
     .setSliderMode(Slider.FLEXIBLE)
-    .setLabel("Lounge Count");
+    .setLabel("Lounge Count")
+    ;
   ;
 
   sliders[1] = cp5.addSlider("zoneCount")
     .setPosition(unit*xMult, header-(margin))
     .setWidth(unit*wMult)
-    //.setSize(unit * wMult-4, 12)
     .setRange(1, 5)
-    //.setNumberOfTickMarks(8)
     .setGroup(groups[0])
     .setSliderMode(Slider.FLEXIBLE)
     ;    
+
   // reposition the Label for controller 'slider'
   for (Slider slider : sliders) {
     slider.getValueLabel().align(ControlP5.RIGHT, ControlP5.TOP_OUTSIDE).setPaddingX(0);
@@ -283,7 +256,6 @@ void AssignMenu(int unit, int xMult, int wMult) {
   ;
 }
 
-
 void ProgMenu(int unit, int xMult, int wMult) {
   int x = unit * xMult;
   int w = unit * wMult;
@@ -310,8 +282,6 @@ void ProgMenu(int unit, int xMult, int wMult) {
     .addItem("Direct", 1)
     .addItem("Script", 2)
     //.addItem("150", 3)
-    //.addItem("200", 4)
-    //.addItem("250", 5)
     .setGroup(groups[1])
     .activate(0)
     ;

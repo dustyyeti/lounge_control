@@ -1,5 +1,5 @@
-int loungeCount = 2;
-int zoneCount =2;
+int loungeCount = 6;
+int zoneCount =3;
 
 int buttCush = 6;
 int lightCount;
@@ -49,11 +49,7 @@ class GUI {
     y = yIn;
     w = wIn;
     h = hIn;
-    //guiI = guiIin;
-    //R = inR;
-    //G = inG;
-    //B = inB;
-    //channel = channelIn;
+
   }
   void update() {
   }

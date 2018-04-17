@@ -1,6 +1,5 @@
 Button butts[];
 CColor[] color1;
-Boolean STOPCOLOR = false;
 
 class Light {
   int x, y, w, h;
@@ -35,24 +34,13 @@ class Light {
     if (state) { // ready to program
       butts[buttI].setLabel("assign color");
       println();
-      if (!STOPCOLOR) {
-        color1[buttI]=butts[buttI].getColor();
-        println("=====================================> record color in array: "+color1[buttI]);  
-        println();
+      //color1[buttI]=butts[buttI].getColor();
 
-      }
+
       butts[buttI].setOff(); // during setcolor programing, there is no need to toggle the button on or off/ stay off.
-      //butts[buttI].setColor(col);
-      //offBlack = color(rgbR*.25,rgbG*.25,rgbB*.25,10);     
-      //butts[buttI].setColorBackground(color(0,0,0,1));
-      //butts[buttI]
     } else {
       butts[buttI].setLabel(lights[buttI].name);
-      //butts.setStringValue(hColor)
       butts[buttI].setColorForeground(butts[buttI].getColor().getActive());
-      println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!> restore color: "+color1[buttI]);  
-      println();      
-      //butts[buttI].setColorForeground(butts[buttI].getColor().getForeground()); // < just trying to set the foreground manually.... something else is overiding
     }
   }
   void MakeButtons() {

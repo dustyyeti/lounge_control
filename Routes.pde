@@ -53,7 +53,6 @@ void Router(String go, String msg) {  //
     SETBUTTS = Boolean.parseBoolean(msg);  //str convert message to bool true/false
 
     if (SETBUTTS) {
-      STOPCOLOR=false;
       for (int i = 0; i<lightCount; i++) {
         //color1[i]=butts[i].getColor().getForeground(); //get the current BG color
         lights[i].Program(Boolean.valueOf(msg), i);
@@ -67,15 +66,7 @@ void Router(String go, String msg) {  //
         //lights[i].Program(Boolean.valueOf(msg), i);
       }
     }
-    //for (Light light : lights) {
 
-    //  light.Program(Boolean.valueOf(msg), light.buttI);
-    //}
-    //if (!SETBUTTS) {
-    //  for (Light light : lights) {    
-    //    butts[light.buttI].setColorBackground(offBlack);
-    //  }
-    //}
     break;
   case "lounge_count":
     updateText = (lounge_count +" lounges zoned");
@@ -133,30 +124,4 @@ void controlEvent(ControlEvent theEvent) {
     conName =  theEvent.getGroup().getName();
     Router(conName, ISOPEN);
   }
-
-
-  //if (theEvent.isController()) println(theEvent.getController().getName());
-  //if (theEvent.isGroup()) println(theEvent.getGroup().getName());  
-  //String conName = theEvent.getController().getName();
-  //println(conName);
-
-  //  if (theEvent.getGroup().getName() == "SetupGrp") {
-  //    if (theEvent.getGroup().isOpen()) {
-  //      println("yaaas");
-  //      origValue = loungeCount;
-  //    } else {
-  //    }
-  //  }
-  //} else if (theEvent.isController()) {
-  //  String guest =theEvent.getController().getName(); 
-  //  println("got something from a controller "
-  //    +guest
-  //    );
-  //  if (guest == "connect_B") {
-  //    if (CONNECTED) {
-  //    } else {
-  //      SetCom();
-  //    }
-  //  }
-  //}
 }

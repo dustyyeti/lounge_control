@@ -11,8 +11,6 @@ GUI[] guis;
 
 
 PFont font;
-
-
 PImage bgImg;
 
 int rgbR = 0;
@@ -30,8 +28,7 @@ Boolean PAUSE = true;
 void setup() {
   size(721, 721);
   colorMode(RGB, 100);
-  //loungeCount = 6;
-  //zoneCount = 3;
+
   cp5 = new ControlP5(this);
   cPick = cPick_def;
   offBlack = color(rgbR*.25, rgbG*.25, rgbB*.25);
@@ -44,13 +41,29 @@ void setup() {
     .setPosition(width/2 - width/3, height/2 -20)
     .setSize(width*2/3, 40)
     .setColorActive(cPick)
-    //.setColorBackground(offBlack) 
-    //.setSwitch(true)
     .setLabel("Phil & Sarah M Disco Light Lounge Control || "+VerStr)
     .setFont(font)
     .setColorLabel(color(60, 100, 0))
     .setColorBackground(color(20, 190))
     ;
+}
+
+void draw() {
+  background(0);
+  background(bgImg);
+  // fill (255, 200, 0);
+  if (!PAUSE) {
+    if (SETBUTTS) {
+      guis[0].display("all");
+      guis[1].display("red");
+      guis[2].display("green");
+      guis[3].display("blue");      
+    }
+
+    for (Light light : lights) {
+      light.Display();
+    }
+  }
 }
 
 void UnPause () {
@@ -61,31 +74,5 @@ void UnPause () {
   start.hide();
   for (Light light : lights) {
     light.MakeButtons();
-  }
-}
-void draw() {
-  background(0);
-  background(bgImg);
-  // fill (255, 200, 0);
-  if (!PAUSE) {
-    if (SETBUTTS) {
-      guis[0].display("all");
-      guis[1].display("red");
-      guis[2].display("green");
-      guis[3].display("blue");
-      if (!STOPCOLOR) printArray(color1);
-      STOPCOLOR=true;
-      
-      
-    }
-
-    //fill (cPick);
-    //rect (margin, margin, width-(2*margin), header);
-
-    //text ("Phil and Sarah M Disco Light Lounge Control", margin*6, 40);
-
-    for (Light light : lights) {
-      light.Display();
-    }
   }
 }
