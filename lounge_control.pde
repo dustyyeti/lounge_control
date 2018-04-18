@@ -25,9 +25,13 @@ color offBlack;// = color (rgbR, rgbG, rgbB,255);
 
 Button start;
 Boolean PAUSE = true;
+
 void StartCom(String COM) {
+
   port = new Serial(this, COM, 9600);
+  CONNECTED=true;
 }
+
 void setup() {
   size(721, 721);
   colorMode(RGB, 100);
@@ -51,7 +55,6 @@ void setup() {
     .setColorLabel(color(60, 100, 0))
     .setColorBackground(color(20, 190))
     ;
-  StartCom("COM6");
 }
 
 void draw() {

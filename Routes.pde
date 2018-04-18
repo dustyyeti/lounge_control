@@ -1,4 +1,4 @@
-Boolean SETBUTTS = false;
+Boolean SETBUTTS = false; //<>// //<>//
 String ExecStr;
 
 
@@ -37,6 +37,8 @@ void Router(String go, String msg) {  //
     println ("hey bozo: "+ExecStr);
     //UpdateUI(ExecStr);
     if (CONNECTED) {
+
+
       WritePort(ExecStr);
     } else {
       println ("not connected");
@@ -69,10 +71,11 @@ void Router(String go, String msg) {  //
   case "connect_B":
     if (!CONNECTED) {
       try {
-        if (Serial.list()[0].isEmpty()) {
-          port= new Serial(this, Serial.list()[0], 9600);
-        }
+        port= new Serial(this, Serial.list()[0], 9600);
+        //if (Serial.list()[0].isEmpty()) {        }
         updateText = "Wahooo! connected @ "+Serial.list()[0];
+        
+        Com=Serial.list()[0];
         CON_CHANGED = true;
       } 
       catch (Exception e) {
@@ -87,7 +90,7 @@ void Router(String go, String msg) {  //
     updateText = msg;
     if (CONNECTED) {
       updateText = "dance, slime! "+updateText;
-      Router("exec_B", ""); //send to the execute routine to sweep all the lights to the serial port
+      //Router("exec_B", ""); //send to the execute routine to sweep all the lights to the serial port
       return;
     } else {
       updateText = "set msg: " + updateText;
