@@ -34,7 +34,7 @@ void Router(String go, String msg) {  //
     break;
   case "exec_B":
     MakeExecStr();
-    print ("hey bozo: "+ExecStr);
+    println ("hey bozo: "+ExecStr);
     //UpdateUI(ExecStr);
     if (CONNECTED) {
       WritePort(ExecStr);
