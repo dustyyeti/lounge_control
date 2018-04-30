@@ -1,6 +1,13 @@
-String VerStr = "0.9.0";
+String VerStr = "0.9.1";
 
 /*
+vers
+0
+
+x.9
+
+x.x.1
+need to solve probelm with the menu logic. 
 
 > here's an online java compiler
 https://compiler.javatpoint.com/opr/test.jsp?filename=StringToCharArrayExample
