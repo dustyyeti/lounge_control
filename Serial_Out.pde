@@ -1,13 +1,14 @@
-Boolean CONNECTED = false;
+Boolean CONNECTED = false; //<>//
 Boolean CON_CHANGED = false;
 int com = 1;
 String Com = "COM";
 String LoadLightProg [];
 
 
+
 void WritePort(String msg) {
-  println("<**--WritePort(msg)"); //<>//
-    
+  println("<**--WritePort(msg)");
+
   char [] portMsg=msg.toCharArray();
   for (int i=0; i<portMsg.length; i++) {
     port.write(portMsg[i]);
@@ -56,6 +57,8 @@ void load () {
       butts[i].setOff();
       //butts[i].setColorActive(color(0));
     }
-    groups[1].close();
+    println("prepare");
+    println("closed");
+
   }
 }

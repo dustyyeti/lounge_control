@@ -60,6 +60,9 @@ void setup() {
 void draw() {
   background(0);
   background(bgImg);
+  if (CLOSEMENUS) {
+    Router("closeall", "");
+  }
   // fill (255, 200, 0);
   //textAlign();
 

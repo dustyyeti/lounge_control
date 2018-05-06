@@ -1,5 +1,5 @@
-int loungeCount = 6;
-int zoneCount =3;
+int loungeCount = 1;
+int zoneCount =2;
 
 int buttCush = 6;
 int lightCount;

@@ -1,5 +1,6 @@
 Boolean SETBUTTS = false; //<>// //<>//
 String ExecStr;
+Boolean CLOSEMENUS = false;
 
 
 void Router(String go, String msg) {  //
@@ -46,7 +47,7 @@ void Router(String go, String msg) {  //
     }
 
     break;
-  case "g3": // GUI group 3, program menu
+  case "g2": // GUI group 3, program menu
     SETBUTTS = Boolean.parseBoolean(msg);  //str convert message to bool true/false
 
     if (SETBUTTS) {
@@ -68,13 +69,27 @@ void Router(String go, String msg) {  //
   case "lounge_count":
     updateText = (lounge_count +" lounges zoned");
     break;
+
+    //> load button already has perfomed actions. zero out state booleans now.    
+  case "closeall":
+    delay(100);
+    println("close now........");
+    groups[0].close();
+    groups[1].close();
+    groups[2].close();
+    CLOSEMENUS=false;
+    break;
+  case "g1":
+    groups[0].close();
+    groups[2].close();
+    break;
   case "connect_B":
     if (!CONNECTED) {
       try {
         port= new Serial(this, Serial.list()[0], 9600);
         //if (Serial.list()[0].isEmpty()) {        }
         updateText = "Wahooo! connected @ "+Serial.list()[0];
-        
+
         Com=Serial.list()[0];
         CON_CHANGED = true;
       } 
@@ -111,7 +126,11 @@ void controlEvent(ControlEvent theEvent) {
   if (theEvent.isController()) {
     conName =  theEvent.getController().getName();
     println ("This isController: "+conName);
-    Router(conName, null);
+    if (conName != "load") {
+      Router(conName, null);
+    } else {    
+      CLOSEMENUS = true;
+    }
   }
   if (theEvent.isGroup()) {
     String ISOPEN = str(theEvent.getGroup().isOpen());

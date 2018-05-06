@@ -12,6 +12,7 @@ int linenum = 0;
 Slider sliders[];
 Slider cSliders[];
 Group groups[];
+Bang loadBang;
 
 int numSliders = 2;
 int numGroups = 3;
@@ -127,7 +128,7 @@ void ExecButton(int unit, int xMult, int wMult) {
 
 void SetupMenu(int unit, int xMult, int wMult) {
   println("<--SetupMenu (unit, xmult, wMult)");
-  groups[0] = cp5.addGroup("SetupGrp")
+  groups[0] = cp5.addGroup("g0")
     .setPosition(unit*xMult, mH)
     .setWidth(unit*wMult-mMarg)
     .setHeight(mH)
@@ -203,7 +204,7 @@ void AssignMenu(int unit, int xMult, int wMult) {
   menuCol.setActive(color(100, 100, 100));
   menuCol.setBackground(color(100, 100, 100));  
     menuCol.setForeground(color(100, 100, 100));  
-  groups[2] = cp5.addGroup("g3")
+  groups[2] = cp5.addGroup("g2")
     .setPosition(x, mH)
     .setWidth(w)
     .setHeight(mH)
@@ -259,7 +260,7 @@ void AssignMenu(int unit, int xMult, int wMult) {
 void ProgMenu(int unit, int xMult, int wMult) {
   int x = unit * xMult;
   int w = unit * wMult;
-  groups[1] = cp5.addGroup("g2")
+  groups[1] = cp5.addGroup("g1")
     .setPosition(x, mH)
     .setWidth(w)
     .setHeight(mH)
@@ -286,7 +287,7 @@ void ProgMenu(int unit, int xMult, int wMult) {
     .activate(0)
     ;
     
-    cp5.addBang("save")
+    loadBang= cp5.addBang("save")
     .setPosition(120,19)
     .setSize (18,18)
     .setGroup(groups[1])
