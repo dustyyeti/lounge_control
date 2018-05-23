@@ -46,7 +46,7 @@ void setup() {
   textFont(font);
   dripFont = loadFont("adrippingmarker-32.vlw"); 
 
-  start = cp5.addButton("start")
+  start = cp5.addButton("Start")
     .setPosition(width/2 - width/3, height/2 -20)
     .setSize(width*2/3, 50)
     .setColorActive(cPick)
@@ -79,7 +79,7 @@ void draw() {
   }
 }
 
-void UnPause () {
+void Start () {
   Survey();
   DrawGui();
   start.setSize(0, 0);

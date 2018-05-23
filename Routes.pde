@@ -29,9 +29,33 @@ void Router(String go, String msg) {  //
 
 
   switch(go) {
-  case "start":
-    UnPause();
+
+  case "SetupGrp":
+    if (Boolean.parseBoolean(msg)) {
+    } else {
+      String zone_str = "Tri";
+      int lc = int(sliders[0].getValue());
+      int zc = int(sliders[1].getValue());
+      if (zc == 5){
+        zone_str="Pent";
+        
+      }
+      println("**************************************************************lounge_count= "+lc);
+      println("**************************************************************zone_count= "+zc+" "+zoneCount);
+  
+      if ((loungeCount != lc) || (zoneCount !=zc)){
+        loungeCount = lc;
+        zoneCount = zc;
+        updateText = (loungeCount +" "+zone_str+"-lounges zoned, redrawing grid");
+        Start();
+        
+      }
+    }
     break;
+
+  //case "start":
+  //  UnPause();
+  //  break;
   case "exec_B":
     MakeExecStr();
     println ("hey bozo: "+ExecStr);
@@ -66,7 +90,6 @@ void Router(String go, String msg) {  //
 
     break;
   case "lounge_count":
-    updateText = (lounge_count +" lounges zoned");
     break;
   case "connect_B":
     if (!CONNECTED) {
@@ -74,7 +97,7 @@ void Router(String go, String msg) {  //
         port= new Serial(this, Serial.list()[0], 9600);
         //if (Serial.list()[0].isEmpty()) {        }
         updateText = "Wahooo! connected @ "+Serial.list()[0];
-        
+
         Com=Serial.list()[0];
         CON_CHANGED = true;
       } 

@@ -1,12 +1,13 @@
 PFont menuFont;
 PImage playImg;
 int margin = 20; // space between rows and columns of buttons, and window edge
-int header = 70; // a top header space
+int header = 80; // a top header space
 int footer = 45;
 int mH =  margin;
 int unit;
 int mMarg = 1;
 int lounge_count;
+int zone_count;
 int linenum = 0;
 
 Slider sliders[];
@@ -51,7 +52,7 @@ void UpdateUI(String msg) {
   if (CON_CHANGED) {
     CONNECTED = !CONNECTED;
     if (CONNECTED) {
-            exec_B.setLabel("EXECUTE");
+      exec_B.setLabel("EXECUTE");
       connect_B.setLabel("DISCONNECT");
       connect_B.setColorBackground(color(30, 100, 0));
       connect_B.setColorForeground(color(100, 30, 0));
@@ -138,24 +139,27 @@ void SetupMenu(int unit, int xMult, int wMult) {
     .setFont(menuFont)
     .close()
     ;
-    
+
   sliders[0] = cp5.addSlider("lounge_count")
-    .setPosition(unit*xMult, margin)
-    .setWidth(unit*wMult)
-    .setRange(1, 8)
+    .setPosition(unit*xMult+5, margin)
+    .setWidth(unit*wMult-10)
+    .setRange(1, 6)
     .setValue(lounge_count)
     .setGroup(groups[0])
     .setSliderMode(Slider.FLEXIBLE)
-    .setLabel("Lounge Count")
+    //.setLabel("Lounge Count")
+    .setNumberOfTickMarks(6)
     ;
   ;
 
-  sliders[1] = cp5.addSlider("zoneCount")
-    .setPosition(unit*xMult, header-(margin))
-    .setWidth(unit*wMult)
-    .setRange(1, 5)
+  sliders[1] = cp5.addSlider("zone_count")
+    .setPosition(unit*xMult+5, header-(margin))
+    .setWidth(unit*wMult-10)
+    .setRange(3, 5)
+    .setValue(zone_count)
     .setGroup(groups[0])
     .setSliderMode(Slider.FLEXIBLE)
+    .setNumberOfTickMarks(2)
     ;    
 
   // reposition the Label for controller 'slider'
@@ -198,11 +202,11 @@ void AssignMenu(int unit, int xMult, int wMult) {
   int x = unit * xMult;
   int w = unit * wMult;
   int sH = 18;
-  color yellow =  color (100,100,100);
-  CColor menuCol = new CColor(yellow,yellow,yellow,yellow,yellow);
+  color yellow =  color (100, 100, 100);
+  CColor menuCol = new CColor(yellow, yellow, yellow, yellow, yellow);
   menuCol.setActive(color(100, 100, 100));
   menuCol.setBackground(color(100, 100, 100));  
-    menuCol.setForeground(color(100, 100, 100));  
+  menuCol.setForeground(color(100, 100, 100));  
   groups[2] = cp5.addGroup("g3")
     .setPosition(x, mH)
     .setWidth(w)
@@ -211,8 +215,8 @@ void AssignMenu(int unit, int xMult, int wMult) {
     .setColor(menuCol)
     .setBackgroundColor(color(0, 85))
     .setBackgroundHeight(header)
-    .setColorValue(color(100,0,0))
-    .setColorActive(color(100,0,0,100))
+    .setColorValue(color(100, 0, 0))
+    .setColorActive(color(100, 0, 0, 100))
     //.setColorForeground(color(cPick))
     .setLabel("Direct Assign")
     .setFont(menuFont)
@@ -274,7 +278,7 @@ void ProgMenu(int unit, int xMult, int wMult) {
   cp5.addRadioButton("radioButton")
     .setPosition(20, 10)
     .setSize(18, 18)
-    .setColorForeground(color(0,75,0))
+    .setColorForeground(color(0, 75, 0))
     .setColorBackground(color(40))
     .setColorActive(color(100))
     .setColorLabel(color(100))
@@ -285,15 +289,15 @@ void ProgMenu(int unit, int xMult, int wMult) {
     .setGroup(groups[1])
     .activate(0)
     ;
-    
-    cp5.addBang("save")
-    .setPosition(120,19)
-    .setSize (18,18)
+
+  cp5.addBang("save")
+    .setPosition(120, 19)
+    .setSize (18, 18)
     .setGroup(groups[1])
     ;
-    cp5.addBang("load")
-    .setPosition(160,19)
-    .setSize (18,18)
+  cp5.addBang("load")
+    .setPosition(160, 19)
+    .setSize (18, 18)
     .setGroup(groups[1])
     ;
 }
