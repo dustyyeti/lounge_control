@@ -5,6 +5,16 @@ String VerStr = "0.9.2";
 > here's an online java compiler
 https://compiler.javatpoint.com/opr/test.jsp?filename=StringToCharArrayExample
 
+>>> working with data in Google sheets
+
+https://forum.processing.org/two/discussion/7943/accessing-google-spreadsheet-with-processingg.org/two/discussion/2417/how-do-i-retrieve-data-from-google-spreadsheet
+
+> Tried code from this project:
+http://blog.blprnt.com/blog/blprnt/open-science-h1n1-processing-and-the-google-spreadsheet-api
+
+>other links
+https://makezine.com/2010/12/10/save-sensor-data-to-google-spreadsh/
+
 
 ************
 * About CColor for controlP5
