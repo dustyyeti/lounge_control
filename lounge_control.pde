@@ -65,7 +65,7 @@ void draw() {
 
   text("Ver "+VerStr, margin, height - margin/2+5);  
   if (!PAUSE) {
-    if (SETBUTTS) {
+    if (SETBUTTS) {  //program mode--reveal extra GUI >> GUI class
       guis[0].display("all");
       guis[1].display("red");
       guis[2].display("green");

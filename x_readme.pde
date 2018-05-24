@@ -1,4 +1,4 @@
-String VerStr = "0.9.1";
+String VerStr = "0.9.2";
 
 /*
 

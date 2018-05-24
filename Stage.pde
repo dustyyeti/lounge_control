@@ -12,7 +12,8 @@ void Survey() {
   guis = new GUI[guicount];
   color1 = new CColor[lightCount];
 
-  guis[0] = new GUI(margin, margin, width-(2*margin), header);//, rgbR, rgbG, rgbB);
+  //> create program guis= the color bars shown when the program menu is open
+  guis[0] = new GUI(2, margin, width/6*5, header);//width-(2*margin), header);
   int gOff = 1; //offset between GUI rectangles
   int gH = guis[0].h/3-gOff;
   float gW = gH*1.6; // because the gui boxes are square  
@@ -54,6 +55,9 @@ class GUI {
   void update() {
   }
   void makeGUI() {
+  }
+  void butt(){
+    
   }
   void display(String channel) {
     int R=0;

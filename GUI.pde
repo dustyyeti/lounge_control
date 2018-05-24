@@ -19,7 +19,7 @@ int numGroups = 3;
 Boolean updated = false;
 int origValue;
 Textarea console;
-Button connect_B, exec_B;
+Button connect_B, exec_B, setAll_B;
 
 StringList statusLine;
 
@@ -40,6 +40,7 @@ void DrawGui() {
   ProgMenu(unit, 1, 2);
   AssignMenu(unit, 3, 2);
   ExecButton(unit, 5, 1);
+  SetAllButton(unit,5,1);
   DrawConsole();
 }
 
@@ -114,8 +115,18 @@ void DrawConsole() {
     .setColorBackground(color(80, 20, 0))
     .setLabel("CONNECT");
   ;
-}
 
+}
+void SetAllButton(int unit, int xMult, int wMult) {
+  setAll_B= cp5.addButton("setAll_B")
+    .setPosition(unit*xMult+mMarg, (header-mH*2))
+    .setWidth(unit*wMult-(mMarg*3))
+    .setHeight(mH*2)
+    .setFont(menuFont)
+    .setLabel("Assign All")
+    .hide()
+    ;
+}
 void ExecButton(int unit, int xMult, int wMult) {
   exec_B= cp5.addButton("exec_B")
     .setPosition(unit*xMult, 0)
@@ -218,7 +229,7 @@ void AssignMenu(int unit, int xMult, int wMult) {
     .setColorValue(color(100, 0, 0))
     .setColorActive(color(100, 0, 0, 100))
     //.setColorForeground(color(cPick))
-    .setLabel("Direct Assign")
+    .setLabel("Program")
     .setFont(menuFont)
     .close()
     ;
@@ -284,7 +295,7 @@ void ProgMenu(int unit, int xMult, int wMult) {
     .setColorLabel(color(100))
     .setItemsPerRow(1)
     .setSpacingColumn(50)
-    .addItem("Direct", 1)
+    .addItem("Execute", 1)
     .addItem("Script", 2)   
     .setGroup(groups[1])
     .activate(0)

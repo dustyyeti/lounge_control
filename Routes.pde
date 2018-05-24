@@ -19,10 +19,11 @@ void Router(String go, String msg) {  //
 
     if (SETBUTTS) {  // the slider change conditions should only be reached when SETBUTTS, anyway, but this ensures no GUI events get confused.
       for (Light light : lights) {
-        println("is it this <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
         butts[light.buttI].setColorForeground(cPick); // foreground is when hovered  //DEBUG
         //butts[light.buttI].setColorActive(cPick);  // active is when ON
       }
+      //> add change hover for setAll_B
+      setAll_B.setColorForeground(cPick);
     }
   }
 
@@ -36,26 +37,24 @@ void Router(String go, String msg) {  //
       String zone_str = "Tri";
       int lc = int(sliders[0].getValue());
       int zc = int(sliders[1].getValue());
-      if (zc == 5){
+      if (zc == 5) {
         zone_str="Pent";
-        
       }
       println("**************************************************************lounge_count= "+lc);
       println("**************************************************************zone_count= "+zc+" "+zoneCount);
-  
-      if ((loungeCount != lc) || (zoneCount !=zc)){
+
+      if ((loungeCount != lc) || (zoneCount !=zc)) {
         loungeCount = lc;
         zoneCount = zc;
         updateText = (loungeCount +" "+zone_str+"-lounges zoned, redrawing grid");
         Start();
-        
       }
     }
     break;
 
-  //case "start":
-  //  UnPause();
-  //  break;
+    //case "start":
+    //  UnPause();
+    //  break;
   case "exec_B":
     MakeExecStr();
     println ("hey bozo: "+ExecStr);
@@ -73,12 +72,13 @@ void Router(String go, String msg) {  //
   case "g3": // GUI group 3, program menu
     SETBUTTS = Boolean.parseBoolean(msg);  //str convert message to bool true/false
 
-    if (SETBUTTS) {
+    if (SETBUTTS) { //if menu is open, change light buttons to program mode
       for (int i = 0; i<lightCount; i++) {
         //color1[i]=butts[i].getColor().getForeground(); //get the current BG color
         lights[i].Program(Boolean.valueOf(msg), i);
       }
-    } else {  //leaving set mode; restore the colors to the BG color
+      setAll_B.show();
+    } else {  //leaving program mode; restore the colors to the BG color
       for (int i = 0; i<lightCount; i++) {
         //butts[i].setColorBackground(colBG[i]);
         lights[i].Program(Boolean.valueOf(msg), i);
@@ -86,10 +86,16 @@ void Router(String go, String msg) {  //
         //colBG[i]=butts[i].getColor().getBackground(); //get the current BG color
         //lights[i].Program(Boolean.valueOf(msg), i);
       }
+      setAll_B.hide(); //hide setall button
     }
 
     break;
   case "lounge_count":
+    break;
+  case "setAll_B":
+    for (int i = 0; i<lightCount; i++) {
+      SetLight(i);
+    }
     break;
   case "connect_B":
     if (!CONNECTED) {
