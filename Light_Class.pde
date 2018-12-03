@@ -8,6 +8,7 @@ class Light {
   color col;
 
   Light(int xIn, int yIn, int wIn, int hIn, String nameIn, color inCol, int inButtI) {
+    println ("---> new Light(nameIn: "+nameIn);
     x = xIn;
     y = yIn;
     w = wIn;

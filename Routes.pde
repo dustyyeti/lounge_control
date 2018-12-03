@@ -45,7 +45,7 @@ void Router(String go, String msg) {  //
         coneCount = lc;
         scannerCount = zc;
         updateText = (coneCount +" cones / "+scannerCount+" scanners; redrawing grid");
-        Start(initTF);
+        Start();
       }
     }
     break;
