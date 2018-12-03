@@ -47,18 +47,20 @@ void setup() {
   dripFont = loadFont("adrippingmarker-32.vlw"); 
 
   start = cp5.addButton("Start")
+    .setBroadcast(false)
     .setPosition(width/2 - width/3, height/2 -20)
     .setSize(width*2/3, 50)
     .setColorActive(cPick)
-    .setLabel("Phil & Sarah M Disco Light Lounge Control")
+    .setLabel("Phil & Sarah M Disco Light Cone Control")
     .setFont(dripFont)
     .setColorLabel(color(60, 100, 0))
     .setColorBackground(color(20, 190))
+    .setBroadcast(true)
     ;
 }
 
 void draw() {
-  background(0);
+  //background(0);
   background(bgImg);
   // fill (255, 200, 0);
   //textAlign();
@@ -81,11 +83,12 @@ void draw() {
 
 void Start () {
   Survey();
-  DrawGui();
+  if (initTF) DrawGui();
   start.setSize(0, 0);
   PAUSE = false;
   start.hide();
   for (Light light : lights) {
     light.MakeButtons();
   }
+  initTF = false;
 }

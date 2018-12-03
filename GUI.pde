@@ -6,8 +6,8 @@ int footer = 45;
 int mH =  margin;
 int unit;
 int mMarg = 1;
-int lounge_count;
-int zone_count;
+int cone_count;
+int scanner_count;
 int linenum = 0;
 
 Slider sliders[];
@@ -24,13 +24,13 @@ Button connect_B, exec_B, setAll_B;
 StringList statusLine;
 
 
-void lounge_count(int theValue) {
-  println("--> loungeCount("+theValue);
+void cone_count(int theValue) {
+  println("--> coneCount("+theValue);
 }
 
 void DrawGui() {
-
-  lounge_count = loungeCount;
+  println("\n<-- DrawGui()");
+  cone_count = coneCount;
   sliders = new Slider[numSliders];
   cSliders = new Slider[3];
   groups = new Group[numGroups];
@@ -40,7 +40,7 @@ void DrawGui() {
   ProgMenu(unit, 1, 2);
   AssignMenu(unit, 3, 2);
   ExecButton(unit, 5, 1);
-  SetAllButton(unit,5,1);
+  SetAllButton(unit, 5, 1);
   DrawConsole();
 }
 
@@ -99,6 +99,7 @@ void DrawConsole() {
   String t = MakeStatus(""); 
 
   console = cp5.addTextarea("console")
+
     .setPosition(margin, height-footer-margin)
     .setSize(w, footer)
     .setFont(createFont("consolas", 12))
@@ -108,32 +109,37 @@ void DrawConsole() {
     .setText(t)
     ;
   connect_B = cp5.addButton("connect_B")
+    .setBroadcast(false)
     .setPosition(margin+w+6, height-footer-margin+4)
     .setSize(side-8, footer-8)
     .setFont(createFont("arial", 10))
     .setColorForeground(color(20, 80, 0))
     .setColorBackground(color(80, 20, 0))
-    .setLabel("CONNECT");
+    .setLabel("CONNECT")
+    .setBroadcast(true);
   ;
-
 }
 void SetAllButton(int unit, int xMult, int wMult) {
   setAll_B= cp5.addButton("setAll_B")
+    .setBroadcast(false)
     .setPosition(unit*xMult+mMarg, (header-mH*2))
     .setWidth(unit*wMult-(mMarg*3))
     .setHeight(mH*2)
     .setFont(menuFont)
     .setLabel("Assign All")
     .hide()
+    .setBroadcast(true)
     ;
 }
 void ExecButton(int unit, int xMult, int wMult) {
   exec_B= cp5.addButton("exec_B")
+    .setBroadcast(false)
     .setPosition(unit*xMult, 0)
     .setWidth(unit*wMult-mMarg)
     .setHeight(mH)
     .setFont(menuFont)
     .setLabel("NOT CONNECTED")
+    .setBroadcast(true)
     ;
 }
 
@@ -151,26 +157,30 @@ void SetupMenu(int unit, int xMult, int wMult) {
     .close()
     ;
 
-  sliders[0] = cp5.addSlider("lounge_count")
+  sliders[0] = cp5.addSlider("cone_count")
+    .setBroadcast(false)
     .setPosition(unit*xMult+5, margin)
     .setWidth(unit*wMult-10)
     .setRange(1, 6)
-    .setValue(lounge_count)
+    .setValue(cone_count)
     .setGroup(groups[0])
     .setSliderMode(Slider.FLEXIBLE)
-    //.setLabel("Lounge Count")
+    //.setLabel("cone Count")
     .setNumberOfTickMarks(6)
+    .setBroadcast(true)
     ;
   ;
 
-  sliders[1] = cp5.addSlider("zone_count")
+  sliders[1] = cp5.addSlider("scanner_count")
+    .setBroadcast(false)
     .setPosition(unit*xMult+5, header-(margin))
     .setWidth(unit*wMult-10)
-    .setRange(3, 5)
-    .setValue(zone_count)
+    .setRange(1, 3)
+    .setValue(scanner_count)
     .setGroup(groups[0])
     .setSliderMode(Slider.FLEXIBLE)
-    .setNumberOfTickMarks(2)
+    .setNumberOfTickMarks(3)
+    .setBroadcast(true)
     ;    
 
   // reposition the Label for controller 'slider'
@@ -234,6 +244,7 @@ void AssignMenu(int unit, int xMult, int wMult) {
     .close()
     ;
   cSliders[0] = cp5.addSlider("rgbR")
+    .setBroadcast(false)
     .setPosition(0, 0)
     .setWidth(w-15)
     .setHeight(sH)
@@ -243,9 +254,11 @@ void AssignMenu(int unit, int xMult, int wMult) {
     .setColorActive(color(100, 0, 0))    
     .setValue(rgbR)
     .setGroup(groups[2])
-    .setLabel("R");
+    .setLabel("R")
+    .setBroadcast(true);
   ;
   cSliders[1] = cp5.addSlider("rgbG")
+    .setBroadcast(false)
     .setPosition(0, 22)
     .setWidth(w-15)
     .setHeight(sH)    
@@ -255,9 +268,11 @@ void AssignMenu(int unit, int xMult, int wMult) {
     .setColorActive(color(0, 100, 0))
     .setValue(rgbG)
     .setGroup(groups[2])
-    .setLabel("G");
+    .setLabel("G")
+    .setBroadcast(true);
   ;
   cSliders[2] = cp5.addSlider("rgbB")
+    .setBroadcast(false)
     .setPosition(0, 44)
     .setWidth(w-15)
     .setHeight(sH)
@@ -267,7 +282,8 @@ void AssignMenu(int unit, int xMult, int wMult) {
     .setColorActive(color(0, 0, 100))
     .setValue(rgbB)
     .setGroup(groups[2])
-    .setLabel("B");
+    .setLabel("B")
+    .setBroadcast(true);
   ;
 }
 
@@ -302,13 +318,17 @@ void ProgMenu(int unit, int xMult, int wMult) {
     ;
 
   cp5.addBang("save")
+    .setBroadcast(false)
     .setPosition(120, 19)
     .setSize (18, 18)
     .setGroup(groups[1])
+    .setBroadcast(true)
     ;
   cp5.addBang("load")
+    .setBroadcast(false)
     .setPosition(160, 19)
     .setSize (18, 18)
     .setGroup(groups[1])
+    .setBroadcast(true)
     ;
 }

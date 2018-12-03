@@ -1,4 +1,5 @@
 Boolean SETBUTTS = false; //<>// //<>//
+Boolean initTF = true;
 String ExecStr;
 
 
@@ -34,20 +35,17 @@ void Router(String go, String msg) {  //
   case "SetupGrp":
     if (Boolean.parseBoolean(msg)) {
     } else {
-      String zone_str = "Tri";
       int lc = int(sliders[0].getValue());
       int zc = int(sliders[1].getValue());
-      if (zc == 5) {
-        zone_str="Pent";
-      }
-      println("**************************************************************lounge_count= "+lc);
-      println("**************************************************************zone_count= "+zc+" "+zoneCount);
 
-      if ((loungeCount != lc) || (zoneCount !=zc)) {
-        loungeCount = lc;
-        zoneCount = zc;
-        updateText = (loungeCount +" "+zone_str+"-lounges zoned, redrawing grid");
-        Start();
+      println("**************************************************************cone_count= "+lc);
+      println("**************************************************************scanner_count= "+zc+" "+scannerCount);
+
+      if ((coneCount != lc) || (scannerCount !=zc)) {
+        coneCount = lc;
+        scannerCount = zc;
+        updateText = (coneCount +" cones / "+scannerCount+" scanners; redrawing grid");
+        Start(initTF);
       }
     }
     break;
@@ -90,7 +88,7 @@ void Router(String go, String msg) {  //
     }
 
     break;
-  case "lounge_count":
+  case "cone_count":
     break;
   case "setAll_B":
     for (int i = 0; i<lightCount; i++) {

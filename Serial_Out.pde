@@ -27,10 +27,14 @@ void save () {
   String[] FileStr = new String[1];
   MakeExecStr();
 
-  printArray(FileStr);
-  FileStr[0] = ExecStr;
+  FileStr[0] = coneCount+":"+scannerCount+"/"+ExecStr;
+  //FileStr[0] = ExecStr;
+  println(FileStr[0]+" <----ExecStr");
   saveStrings("file.txt", FileStr);
 }
+
+//-- sample output string:
+//>>  5:1/<+0*#0033FF>|<+1*#0033FF>|<-2>|<+3*#0033FF>|<-4>
 
 void load () {
   println("<--load()");  
@@ -42,7 +46,10 @@ void load () {
     println(FileStr[i]);
     tempStr += FileStr[i]; //get the array into a string
   }
-  LoadLightProg = split(tempStr, '|');
+  String parse[] = split(tempStr,'/');
+  coneCount = int(parse[0]);
+  scannerCount = int(parse[1]);
+  LoadLightProg = split(parse[1], '|');
   for (int i=0; i<LoadLightProg.length; i++) {
     print(LoadLightProg[i]);
     SetStr = split(LoadLightProg[i], '*');

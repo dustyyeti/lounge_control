@@ -48,12 +48,14 @@ class Light {
 
 
     butts[buttI] = cp5.addButton(name).setPosition(x+buttCush, y+buttCush)
+      .setBroadcast(false)
       .setSize(w-buttCush*3/2, h-buttCush*3/2)
       .setColor(col)
       .setSwitch(true)
       .setStringValue(hColor)
       .setFont(createFont("calibri light bold", 13))
-      .setOff();      
+      .setOff()
+          .setBroadcast(true);      
     ;
     butts[buttI].addCallback(new CallbackListener() {
       public void controlEvent(CallbackEvent theEvent) {

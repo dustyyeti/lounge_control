@@ -1,12 +1,12 @@
-int loungeCount = 6;
-int zoneCount =3;
+int coneCount = 5;
+int scannerCount =1;
 
 int buttCush = 6;
 int lightCount;
 
 void Survey() {
   int guicount = 4;  
-  lightCount = loungeCount * zoneCount;
+  lightCount = coneCount * scannerCount;
   lights = new Light[lightCount];
   butts = new Button[lightCount];
   guis = new GUI[guicount];
@@ -21,14 +21,14 @@ void Survey() {
     guis[i] = new GUI(guis[0].x+gOff, guis[0].y+gH*(i-1)+(gOff*2), int(gW), gH);
   }
   //calcluate button sizes
-  int bW = ((width - margin ) / (zoneCount)) - margin;
-  int bH = ((height - header - footer - (3*margin)) / (loungeCount) ) - margin;  
+  int bW = ((width - margin ) / (scannerCount)) - margin;
+  int bH = ((height - header - footer - (3*margin)) / (coneCount) ) - margin;  
   int bX, bY;
   int bX2, bY2;
   int index = 0;
   String bName;
-  for (int y = 0; y < loungeCount; y++) {
-    for (int x = 0; x < zoneCount; x++) {
+  for (int y = 0; y < coneCount; y++) {
+    for (int x = 0; x < scannerCount; x++) {
       bX = margin + (x*bW+ margin * x);
       bY = header + (margin*2) + (y*bH+ margin * y);
       bName = "# Light "+(index+1)+"   ["+(y+1)+"-"+(x+1)+"]";  
